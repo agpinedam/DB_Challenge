@@ -69,7 +69,4 @@ public class Children {
         this.gender = gender;
     }
 
-    public String toString(){
-        return "Persona [idPersona "+idChild+", nombre" +fullName;
-    }
-}
+  }
