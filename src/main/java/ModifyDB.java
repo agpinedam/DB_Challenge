@@ -1,7 +1,7 @@
 import helper.CrudEmployee;
 import java.sql.Date;
 
-public class Principal {
+public class ModifyDB {
     protected static CrudEmployee crudEmployee = new CrudEmployee();
 
     public static void main(String[] args)

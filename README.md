@@ -116,8 +116,19 @@ INSERT INTO Institution (idInstitution, idEmployee, institutionName) VALUES ('5'
 
 ### Structure
 
+* ***resources:*** Contains the main and the following actions:
+	- Get all the employees from the Employee table.
+	- Insert an employee into the Employee table.
+	- Update information from an employee in Employee table.
+	- Find an employee with the last name from Employee table.
+	- Delete an employee from the Employee table. 
+
 **Packages**
 
-* _resources:_ Contains the package META_INFO that contains persistance.xml, that file contains the configuration for the connection with the database people.
-* _database:_  Have the following classes:
-	- BaseQuery : Contains generic actions (add, remove, update, delete, select) using the entity manager.
+* ***resources:*** Contains the package META_INFO that contains persistance.xml, that file contains the configuration for the connection with the database people.
+* ***database:*** Have the following classes:
+	- _JPAUTIL:_ Allow the connection between the persistence.xlm and the program. Also, generate the entity factory.
+	- _BaseQuer:y_ Contains generic actions (add, remove, update, delete, select) using the entity manager.
+	- _EmployeeQuery:_ Inherits from BaseQuery and creates specifics actions for the Employee table.
+* ***entities:*** Have the class Employee, witch contains the getters and setters for the table columns.
+* ***helper:*** Have the class CrudEmployee that aims to display the actions by console and connect the class ModifyDB with the others classes.   
