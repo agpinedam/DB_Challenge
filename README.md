@@ -1,6 +1,6 @@
 # DB_Challenge
 
-## Creation of DB people H2
+## Creation of DB people
 
 
 Using mySQL Workench, we have written the following instructions for the creation of the employee, company, children, instituttion, and degree tables, additionally they were filled with some values with the following commands:
@@ -105,3 +105,6 @@ INSERT INTO Institution (idInstitution, idEmployee, institutionName) VALUES ('5'
 ````sql
  SELECT * From Children Where idEmployee in (SELECT idEmployee From Employee Where idCompany in (SELECT idCompany From Company Where idCompany = 5));
 ````
+
+## Program details
+

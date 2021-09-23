@@ -12,11 +12,12 @@ public class CrudEmployee {
     protected EmployeeQuery employeeQuery = new EmployeeQuery();
     protected List<Employee> resultsCompany;
 
-    // no-argument constructor
+
     public CrudEmployee() { }
 
     public void insertEmployee(int idEmployee, String firstName, String lastName, String email, String phoneNumber
             , String address, double salary, Date birthDate, int idCompany) {
+
         Boolean result = employeeQuery.addCompany(idEmployee,firstName,lastName,email,phoneNumber,address,salary,
                 birthDate,idCompany);
 
@@ -28,32 +29,44 @@ public class CrudEmployee {
 
     public void getAllEmployees() {
         resultsCompany = employeeQuery.getAllEmployees();
-        for (Employee comp : resultsCompany) {
-            System.out.print(comp.getIdCompany()+"  -  ");
-            System.out.print(comp.getFirstName()+"  -  ");
-            System.out.print(comp.getPhoneNumber()+"  -  ");
-            System.out.print(comp.getEmail()+"  -  ");
-            System.out.println(comp.getAddress());
+        for (Employee employee : resultsCompany) {
+            System.out.println(employee.getIdEmployee()+"\t"+
+                    employee.getFirstName() + "\t\t" +
+                    employee.getLastName() + "\t\t" +
+                    employee.getEmail() + "\t\t" +
+                    employee.getPhoneNumber() + "\t\t" +
+                    employee.getAddress() + "\t\t" +
+                    employee.getSalary() + "\t\t" +
+                    employee.getBirthDate() + "\t\t" +
+                    employee.getIdCompany());
         }
     }
 
-    public void findEmployeeById(int idComp) {
-        employee = employeeQuery.getEmployeeById(idComp);
-            System.out.print(employee.getIdCompany()+"  -  ");
-            System.out.print(employee.getFirstName()+"  -  ");
-            System.out.print(employee.getPhoneNumber()+"  -  ");
-            System.out.print(employee.getEmail()+"  -  ");
-            System.out.println(employee.getAddress());
+    public void findEmployeeById(int idEmployee) {
+        employee = employeeQuery.getEmployeeById(idEmployee);
+        System.out.println(employee.getIdEmployee()+"\t"+
+                employee.getFirstName() + "\t\t" +
+                employee.getLastName() + "\t\t" +
+                employee.getEmail() + "\t\t" +
+                employee.getPhoneNumber() + "\t\t" +
+                employee.getAddress() + "\t\t" +
+                employee.getSalary() + "\t\t" +
+                employee.getBirthDate() + "\t\t" +
+                employee.getIdCompany());
     }
 
-    public void findEmployeeByLastName(String coName) {
-        resultsCompany = employeeQuery.getEmployeeByLastName(coName);
-        for (Employee comp : resultsCompany) {
-            System.out.print(comp.getIdCompany()+"  -  ");
-            System.out.print(comp.getFirstName()+"  -  ");
-            System.out.print(comp.getPhoneNumber()+"  -  ");
-            System.out.print(comp.getEmail()+"  -  ");
-            System.out.println(comp.getAddress());
+    public void findEmployeeByLastName(String lastName) {
+        resultsCompany = employeeQuery.getEmployeeByLastName(lastName);
+        for (Employee employee : resultsCompany) {
+            System.out.println(employee.getIdEmployee()+"\t"+
+                    employee.getFirstName() + "\t\t" +
+                    employee.getLastName() + "\t\t" +
+                    employee.getEmail() + "\t\t" +
+                    employee.getPhoneNumber() + "\t\t" +
+                    employee.getAddress() + "\t\t" +
+                    employee.getSalary() + "\t\t" +
+                    employee.getBirthDate() + "\t\t" +
+                    employee.getIdCompany());
         }
     }
 

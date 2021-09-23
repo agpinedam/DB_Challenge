@@ -10,14 +10,13 @@ import java.util.List;
 
 public class EmployeeQuery {
 
-    EntityManager entityManager;  // Variable para obtener la conexion.
+    EntityManager entityManager;
     Employee employee;
-    List<Employee> listEmployee = null;
+    List<Employee> listEmployee;
 
-    // constructor
     public EmployeeQuery() {
-        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager(); // abre la conexion con la BD.
-        listEmployee = new ArrayList<Employee>();
+        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        listEmployee = new ArrayList<>();
     }
 
     public Boolean addCompany(int idEmployee, String firstName, String lastName, String email, String phoneNumber, String address,
@@ -56,7 +55,7 @@ public class EmployeeQuery {
     public Boolean updateEmployee(int idEmployee, String firstName, String lastName, String email, String phoneNumber
             , String address, double salary, Date birthDate, int idCompany)
     {
-        Boolean result = false;
+        boolean result = false;
         employee = new Employee();
 
         employee = entityManager.find(Employee.class, idEmployee);
@@ -75,7 +74,6 @@ public class EmployeeQuery {
             entityManager.getTransaction().commit();
             result = entityManager.contains(employee);
         }
-        else ;
         return result;
     }
 
@@ -91,7 +89,6 @@ public class EmployeeQuery {
             entityManager.getTransaction().commit();
             result=1;
         }
-        else ;
         return result;
     }
 }

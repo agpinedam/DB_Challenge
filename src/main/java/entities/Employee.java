@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 
-@Entity(name="Employee")  //Declara Entidad Company, que Representa una tabla en la Base de Datos
+@Entity(name="Employee")
 @Table(name="Employee")
 public class Employee {
     @Id
