@@ -92,4 +92,4 @@ INSERT INTO Institution (idInstitution, idEmployee, institutionName) VALUES ('5'
 
 ### Relations between tables
 
-![plot](.relations.png)
+![plot](relations.png)
