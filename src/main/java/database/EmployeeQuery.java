@@ -2,93 +2,88 @@ package database;
 
 import entities.Employee;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeQuery {
+public class EmployeeQuery extends BaseQuery {
 
-    EntityManager entityManager;
-    Employee employee;
-    List<Employee> listEmployee;
+    private Employee employee;
+    private List<Employee> listEmployee;
+    private String tableName;
+    private String columnLastName;
+
 
     public EmployeeQuery() {
-        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         listEmployee = new ArrayList<>();
+        tableName = "Employee";
+        columnLastName = "lastName";
     }
 
-    public Boolean addCompany(int idEmployee, String firstName, String lastName, String email, String phoneNumber, String address,
-                              double salary, Date birthDate, int idCompany)
-    {
+    public boolean addEmployee(int idEmployee, String firstName, String lastName, String email, String phoneNumber,
+                               String address, double salary, Date birthDate, int idCompany) {
         employee = new Employee(idEmployee,firstName,lastName,email,phoneNumber,address,salary,birthDate,idCompany);
-
-        entityManager.getTransaction().begin();
-        entityManager.persist(employee);
-        entityManager.getTransaction().commit();
-
+        addObjectToTable(employee);
         return entityManager.contains(employee);
     }
 
-    public List<Employee> getAllEmployees()
-    {
-        Query query=entityManager.createQuery("From Employee");
-        listEmployee = (List<Employee>) query.getResultList();
-        return listEmployee;
-    }
-
-    public Employee getEmployeeById(int idEmployee)
-    {
-        employee = entityManager.find(Employee.class, idEmployee);
-        return employee;
-    }
-
-    public List<Employee> getEmployeeByLastName(String lastName)
-    {
-        Query query=entityManager.createQuery("SELECT p FROM Employee p WHERE p.lastName = :lastName");
-        query.setParameter("lastName", lastName);
+    public List<Employee> getAllEmployees() {
+        Query query = fomTable(tableName);
         listEmployee = query.getResultList();
         return listEmployee;
     }
 
-    public Boolean updateEmployee(int idEmployee, String firstName, String lastName, String email, String phoneNumber
-            , String address, double salary, Date birthDate, int idCompany)
-    {
-        boolean result = false;
-        employee = new Employee();
-
-        employee = entityManager.find(Employee.class, idEmployee);
-        if(employee != null) {
-            employee.setFirstName(firstName);
-            employee.setLastName(lastName);
-            employee.setEmail(email);
-            employee.setPhoneNumber(phoneNumber);
-            employee.setAddress(address);
-            employee.setSalary(salary);
-            employee.setBirthDate(birthDate);
-            employee.setIdCompany(idCompany);
-
-            entityManager.getTransaction().begin();
-            entityManager.merge(employee);
-            entityManager.getTransaction().commit();
-            result = entityManager.contains(employee);
-        }
-        return result;
+    public Employee getEmployeeById(int idEmployee) {
+        employee = findEmployee(idEmployee);
+        return employee;
     }
 
-    public int deleteEmployee(int idEmployee)
-    {
-        int result = 0;
-        employee = new Employee();
+    public List<Employee> getEmployeeByLastName(String lastName) {
+        Query query = selectObjectFromTableByAttribute(tableName,columnLastName);
+        setQueryParams(query,columnLastName,lastName);
+        listEmployee = query.getResultList();
+        return listEmployee;
+    }
 
-        employee = entityManager.find(Employee.class, idEmployee);
+    public boolean updateEmployee(int idEmployee, String firstName, String lastName, String email, String phoneNumber
+            , String address, double salary, Date birthDate, int idCompany) {
+        employee = createEmployee(idEmployee);
         if(employee != null) {
-            entityManager.getTransaction().begin();
-            entityManager.remove(employee);
-            entityManager.getTransaction().commit();
-            result=1;
+            setEmployee(firstName, lastName, email, phoneNumber, address, salary, birthDate, idCompany);
+            updateObjectIntoTable(employee);
+            return entityManager.contains(employee);
+        }else {
+            return false;
         }
-        return result;
+    }
+
+    public boolean deleteEmployee(int idEmployee) {
+        employee = createEmployee(idEmployee);
+        if(employee != null) {
+            removeObjectToTable(employee);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private Employee createEmployee (int idEmployee){
+        employee = new Employee();
+         return findEmployee(idEmployee);
+    }
+    private Employee findEmployee (int idEmployee){
+        return entityManager.find(Employee.class, idEmployee);
+    }
+    private void setEmployee(String firstName, String lastName, String email, String phoneNumber, String address,
+                             double salary, Date birthDate, int idCompany){
+        employee.setFirstName(firstName);
+        employee.setLastName(lastName);
+        employee.setEmail(email);
+        employee.setPhoneNumber(phoneNumber);
+        employee.setAddress(address);
+        employee.setSalary(salary);
+        employee.setBirthDate(birthDate);
+        employee.setIdCompany(idCompany);
     }
 }
