@@ -27,8 +27,8 @@ public class Principal {
         //crudChild.updateChild(7,92,"Dayana Maria",date,"masculine");
         //crudChild.findChildByName("Gohan");
         //crudChild.deleteChild(7);
-        //crudChild.getAllChildren();
+        crudChild.getAllChildren();
         //crudChild.deleteChild(1);
-        crudEmployee.getAllEmployees();
+        //crudEmployee.getAllEmployees();
     }
 }
