@@ -5,7 +5,7 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
     <persistence-unit name="PERSISTENCE">
-        <description>Ejemplo CRUD basico Hibarnate JPA</description>
+        <description>Challenge DataBase using Hibernate JPA</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>entities.Children</class>

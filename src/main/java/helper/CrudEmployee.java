@@ -2,14 +2,11 @@ package helper;
 
 import database.EmployeeQuery;
 import entities.Employee;
-
-import javax.persistence.Query;
 import java.sql.Date;
 import java.util.List;
 
 public class CrudEmployee {
 
-    protected Employee employee = new Employee();
     protected EmployeeQuery employeeQuery = new EmployeeQuery();
     protected List<Employee> resultsCompany;
 
@@ -29,12 +26,6 @@ public class CrudEmployee {
         for (Employee employee : resultsCompany) {
             printAllInformation(employee);
         }
-    }
-
-    public void findEmployeeById(int idEmployee) {
-        employee = employeeQuery.getEmployeeById(idEmployee);
-        printHeadersInfo();
-        printAllInformation(employee);
     }
 
     public void findEmployeeByLastName(String lastName) {

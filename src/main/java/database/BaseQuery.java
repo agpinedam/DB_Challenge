@@ -11,12 +11,12 @@ public class BaseQuery {
         entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
     }
 
-    protected void addObjectToTable(Object object){
+    protected void addObjectIntoTable(Object object){
         entityManager.getTransaction().begin();
         entityManager.persist(object);
         entityManager.getTransaction().commit();
     }
-    protected void removeObjectToTable(Object object){
+    protected void removeObjectFromTable(Object object){
         entityManager.getTransaction().begin();
         entityManager.remove(object);
         entityManager.getTransaction().commit();
@@ -26,7 +26,7 @@ public class BaseQuery {
         entityManager.merge(object);
         entityManager.getTransaction().commit();
     }
-    protected Query fomTable(String tableName){
+    protected Query selectFromTable(String tableName){
         return entityManager.createQuery("From " + tableName);
     }
     protected Query selectObjectFromTableByAttribute(String table,String columnName){

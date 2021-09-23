@@ -11,8 +11,8 @@ public class EmployeeQuery extends BaseQuery {
 
     private Employee employee;
     private List<Employee> listEmployee;
-    private String tableName;
-    private String columnLastName;
+    private final String tableName;
+    private final String columnLastName;
 
 
     public EmployeeQuery() {
@@ -24,19 +24,14 @@ public class EmployeeQuery extends BaseQuery {
     public boolean addEmployee(int idEmployee, String firstName, String lastName, String email, String phoneNumber,
                                String address, double salary, Date birthDate, int idCompany) {
         employee = new Employee(idEmployee,firstName,lastName,email,phoneNumber,address,salary,birthDate,idCompany);
-        addObjectToTable(employee);
+        addObjectIntoTable(employee);
         return entityManager.contains(employee);
     }
 
     public List<Employee> getAllEmployees() {
-        Query query = fomTable(tableName);
+        Query query = selectFromTable(tableName);
         listEmployee = query.getResultList();
         return listEmployee;
-    }
-
-    public Employee getEmployeeById(int idEmployee) {
-        employee = findEmployee(idEmployee);
-        return employee;
     }
 
     public List<Employee> getEmployeeByLastName(String lastName) {
@@ -61,7 +56,7 @@ public class EmployeeQuery extends BaseQuery {
     public boolean deleteEmployee(int idEmployee) {
         employee = createEmployee(idEmployee);
         if(employee != null) {
-            removeObjectToTable(employee);
+            removeObjectFromTable(employee);
             return true;
         }else {
             return false;
@@ -75,6 +70,7 @@ public class EmployeeQuery extends BaseQuery {
     private Employee findEmployee (int idEmployee){
         return entityManager.find(Employee.class, idEmployee);
     }
+
     private void setEmployee(String firstName, String lastName, String email, String phoneNumber, String address,
                              double salary, Date birthDate, int idCompany){
         employee.setFirstName(firstName);

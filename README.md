@@ -108,3 +108,16 @@ INSERT INTO Institution (idInstitution, idEmployee, institutionName) VALUES ('5'
 
 ## Program details
 
+### Dependencies used:
+* Hibernate core
+* Hibernate entitymager
+* Javax persistance
+* mysql
+
+### Structure
+
+**Packages**
+
+* _resources:_ Contains the package META_INFO that contains persistance.xml, that file contains the configuration for the connection with the database people.
+* _database:_  Have the following classes:
+	- BaseQuery : Contains generic actions (add, remove, update, delete, select) using the entity manager.

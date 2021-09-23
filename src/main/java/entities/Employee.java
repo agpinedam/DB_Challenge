@@ -48,10 +48,6 @@ public class Employee {
         return idEmployee;
     }
 
-    public void setIdEmployee(int idEmployee) {
-        this.idEmployee = idEmployee;
-    }
-
     public String getFirstName() {
         return firstName;
     }
